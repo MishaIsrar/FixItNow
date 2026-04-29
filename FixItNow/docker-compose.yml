@@ -1,0 +1,6 @@
+services:
+  fixitnow:
+    image: ${DOCKER_REGISTRY-}fixitnow
+    build:
+      context: .
+      dockerfile: FixItNow/Dockerfile

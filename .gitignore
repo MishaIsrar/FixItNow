@@ -1,0 +1,14 @@
+bin/
+obj/
+.vs/
+.vscode/
+*.user
+*.suo
+*.rsuser
+*.cache
+*.log
+*.db
+*.sqlite
+*.sqlite3
+appsettings.*.local.json
+FixItNow/FixItNow/wwwroot/uploads/

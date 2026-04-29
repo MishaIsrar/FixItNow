@@ -1,0 +1,164 @@
+﻿@{
+    Layout = "_Layout1";
+}
+@model FixItNow.Models.ViewModel.UserCart
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>User Cart</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #bfd7ef;
+            font-family: Arial, sans-serif;
+        }
+
+        .card {
+            border-radius: 10px;
+        }
+
+        .card-header {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        table thead th {
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        table tbody td {
+            vertical-align: middle;
+        }
+
+        h2 {
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid my-5">
+        <h2 class="text-center mb-4">My Cart</h2>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Past Bookings</h5>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Booking Id</th>
+                                    <th>Service Id</th>
+                                    <th>Date</th>
+                                    <th>Spending</th>
+                                    <th>Review</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if ( Model.Bookings != null)
+                                {
+                                    for (int i = 0; i < Model.Bookings.Count(); i++)
+                                    {
+                                        <tr>
+                                            <td>@Model.Bookings[i]?.Id</td>
+                                            <td>@Model.Bookings[i]?.serviceId</td>
+                                            <td>@Model.Bookings[i]?.Time</td>
+                                            <td>@Model.Bookings[i]?.pricing</td>
+                                            <td>
+                                                @if (Model.exists[i] == 1)
+                                                {
+                                                    <span>Review Done</span>
+                                                }
+                                                else
+                                                {
+                                                    <button class="btn btn-primary" onclick="openReviewForm(@Model.Bookings[i].serviceId)">Add Review</button>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="5" class="text-center">No bookings available.</td>
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid mb-5">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">Saved Services</h5>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Service Id</th>
+                                    <th>Service Name</th>
+                                    <th>Book This Service</th>
+                                    <th>Remove from Saved Services</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.SavedServices != null)
+                                {
+                                    for (int i = 0; i < Model.SavedServices.Count(); i++)
+                                    {
+                                        <tr>
+                                            <td>@(i + 1)</td>
+                                            <td>@Model.SavedServices[i]?.serviceId</td>
+                                            <td>@Model.SavedServices[i]?.serviceName</td>
+                                            <td>
+                                                <a href="/Booking/Index/@Model.SavedServices[i].serviceId" class="btn btn-success text-white">Book Now</a>
+                                            </td>
+                                            <td>
+                                                <a href="/Services/RemoveFromSaved/@Model.SavedServices[i].id" class="btn btn-danger text-white">Remove</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="5" class="text-center">No saved services available.</td>
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="reviewForm" style="display: none;">
+        @Html.Partial("_ReviewForm")
+    </div>
+
+    <script>
+        function openReviewForm(serviceId) {
+            const reviewForm = document.getElementById('reviewForm');
+            const serviceInput = document.getElementById('serviceid');
+            if (serviceInput) {
+                serviceInput.value = serviceId;
+            }
+            reviewForm.style.display = 'block';
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

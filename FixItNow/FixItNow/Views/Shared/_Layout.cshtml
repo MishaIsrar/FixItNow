@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - FixItNow</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" asp-append-version="true" />
+</head>
+<body>
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        (() => {
+            if (!window.signalR) {
+                return;
+            }
+
+            const connection = new signalR.HubConnectionBuilder().withUrl("/notificationhub").build();
+            connection.on("ReceiveNotification", () => {
+                const toast = document.getElementById("liveToast");
+                if (toast && window.bootstrap) {
+                    new bootstrap.Toast(toast).show();
+                }
+            });
+
+            connection.start().catch(() => {});
+
+            const serviceForm = document.getElementById("serviceform");
+            if (serviceForm) {
+                serviceForm.addEventListener("submit", () => {
+                    connection.invoke("SendNotification").catch(() => {});
+                });
+            }
+        })();
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

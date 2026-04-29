@@ -1,0 +1,24 @@
+services:
+  fixitnow:
+    image: ${IMAGE_NAME}
+    container_name: fixitnow
+    restart: unless-stopped
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_HTTP_PORTS: 8080
+      DatabaseProvider: Sqlite
+      ConnectionStrings__DefaultConnection: Data Source=/app/data/fixitnow.db
+      DataProtection__KeyPath: /app/keys
+      Admin__Email: ${ADMIN_EMAIL}
+      Admin__Password: ${ADMIN_PASSWORD}
+    ports:
+      - "80:8080"
+    volumes:
+      - fixitnow-data:/app/data
+      - fixitnow-keys:/app/keys
+      - fixitnow-uploads:/app/wwwroot/uploads
+
+volumes:
+  fixitnow-data:
+  fixitnow-keys:
+  fixitnow-uploads:

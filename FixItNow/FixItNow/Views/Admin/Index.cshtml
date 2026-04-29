@@ -1,0 +1,242 @@
+﻿@{
+    Layout = null;
+}
+@model FixItNow.Models.ViewModel.Admin
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #dae9f5;
+        }
+
+        .stats-card i {
+            font-size: 2rem;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: bolder;
+            margin-bottom: 15px;
+            color: #007bff;
+        }
+
+        .timeline-item {
+            margin-bottom: 20px;
+        }
+
+            .timeline-item h6 {
+                font-size: 1rem;
+                margin-bottom: 5px;
+            }
+
+        .action-btn {
+            color: #fff;
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+
+        .approve-btn {
+            background-color: #28a745;
+        }
+
+        .reject-btn {
+            background-color: #dc3545;
+        }
+
+        .view-all {
+            text-align: right;
+            margin-top: -30px;
+            margin-bottom: 10px;
+        }
+
+            .view-all a {
+                font-size: 0.9rem;
+                color: #007bff;
+                text-decoration: none;
+            }
+
+                .view-all a:hover {
+                    text-decoration: underline;
+                }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-card {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+            .stats-card h6 {
+                font-size: 1rem;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+
+            .stats-card .number {
+                font-size: 1.5rem;
+                font-weight: bold;
+                color: #333;
+            }
+
+        .links {
+            margin-left: 100px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Admin Panel</a>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <div class="row mb-4">
+            <div class="col-lg-3 col-sm-6">
+                <div class="card stats-card">
+                    <div class="card-body">
+                        <i class="fas fa-users"></i>
+                        <h6>Total Users</h6>
+                        <div class="number">@Model.users.Count()</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="card stats-card">
+                    <div class="card-body">
+                        <i class="fas fa-calendar-check"></i>
+                        <h6>Total Bookings</h6>
+                        <div class="number">@Model.bookings.Count()</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="card stats-card">
+                    <div class="card-body">
+                        <i class="fas fa-dollar-sign"></i>
+                        <h6>Revenue</h6>
+                        <div class="number">$@Model.revenue</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="card stats-card">
+                    <div class="card-body">
+                        <i class="fas fa-clock"></i>
+                        <h6>Pending Approvals</h6>
+                        <div class="number">@Model.providers.Count()</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="section-title">New User Analytics</h5>
+                        <img src="images/user graph.png" alt="Graph Analytics" class="img-fluid rounded">
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="section-title">Users Timeline</h5>
+                            <div class="view-all"><a href="/Admin/AllUsers">View All</a></div>
+                        </div>
+                        @if(Model.users.Count()!=0 && Model.users!=null)
+                        {
+                            @for (int i = 0; i <= 10 && i < Model.users.Count(); i++)
+                            {
+                                <div class="timeline-item">
+                                    <h6>@Model.users[i].firstName @Model.users[i].lastName</h6>
+                                    <p class="text-muted" style="display: inline;">Joined on @Model.users[i].joinedTime</p>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <h4>No Data to show</h4>
+                        }
+
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="section-title">Bookings Timeline</h5>
+                            <div class="view-all"><a href="/Admin/AllBookings">View All</a></div>
+                        </div>
+                        @for (int i = 0; i <= 10 && i<Model.bookings.Count(); i++)
+                        {
+                            <div class="timeline-item">
+                                <h6>Booking @Model.bookings[i].Id</h6>
+                                <p class="text-muted">Service:@Model.bookings[i].serviceId</p>
+                                <p class="text-muted">Booked on @Model.bookings[i].Date</p>
+                            </div>
+                        }
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="section-title">Approve Providers</h5>
+         
+                        </div>
+                        @if(Model.providers.Count()!=0)
+                        {
+                            @foreach (var i in Model.providers)
+                            {
+                                <div class="timeline-item">
+                                    <h6>Provider: @i.FirstName @i.LastName</h6>
+                                    <button class="btn action-btn approve-btn"><a href="/Admin/Approve/@i.Id" style="text-decoration:none;color:black;">Approve</a></button>
+                                    <button class="btn action-btn reject-btn"><a href="/Admin/Reject/@i.Id" style="text-decoration:none;color:black;">Reject</a></button>
+                                </div>
+
+                            }
+                        }
+                        else
+                        {
+                            <h4>No Requests At the Moment</h4>
+                        }
+
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

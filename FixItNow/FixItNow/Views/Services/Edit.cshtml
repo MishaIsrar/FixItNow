@@ -1,0 +1,77 @@
+﻿@{
+    Layout = null;
+}
+@model Service
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Service</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #dae9f5;
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-label {
+            font-weight: bolder;
+            font-size: large;
+            color: #0056b3;
+        }
+
+        .btn-custom {
+            background-color: #0d6efd;
+            color: #fff;
+            border-radius: 20px;
+            padding: 10px 20px;
+        }
+
+            .btn-custom:hover {
+                background-color: #0056b3;
+            }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Edit Service</a>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title text-center mb-4" style="color: #054c93; font-size:xx-large;">Edit Service</h3>
+                        <form method="post" asp-action="Edit" asp-controller="Services" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="serviceTitle" class="form-label">Service Title</label>
+                                <input type="text" class="form-control" name="Title" id="serviceTitle" placeholder="Enter new service title" value="@Model.title">
+                            </div>
+                            <div class="mb-3">
+                                <label for="serviceDescription" class="form-label">Service Description</label>
+                                <textarea class="form-control" name="Description" id="serviceDescription" rows="3" placeholder="edit description">@Model.description</textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="servicePricing" class="form-label">Pricing</label>
+                                <input type="number" class="form-control" name="Price" id="servicePricing" placeholder="edit pricing" value="@Model.pricing">
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-custom">Save Changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,441 @@
+﻿@{
+    Layout = "_Layout";
+}
+@model List<Review>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> HomePage</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <style>
+         .toast {
+    min-width: 250px;
+    max-width: 350px;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.toast-header {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.toast-body {
+    padding: 10px;
+    font-size: 14px;
+}
+
+.toast-body a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+         .bg-custom
+         {
+             background-color:#1c63a7;
+         }
+         .bg-custom1
+         {
+             background-color: #8fc1e5;
+         }
+         .bg-custom2
+         {
+             background-color:#f48763;
+             border-radius: 4px;
+             text-align: left;
+             padding-left: 10px;
+         }
+         .btn-success {
+         background-color: #f48763 ;
+         color: black;
+         border: 1px solid #e6e9eb;
+         padding: 10px 20px;
+         font-size: 16px;
+         border-radius: 5px;
+         text-decoration: none;
+         transition: background-color 0.3s ease, transform 0.2s ease;
+         }
+         .btn-success:hover {
+         background-color:#0a4b78;
+         transform: scale(1.05);
+         }
+         .hero-section {
+           background-color: #f9f9f9;
+           color:white;
+         }
+         .sect
+         {
+             position: relative;
+             top:50px;
+         }
+         .services-section
+         {
+             background-color: #1c1e21;
+             color: #ffffff;
+             padding: 100px 0;
+         }
+         .service-icon
+         {
+             font-size: 40px;
+             color: #ffffff;
+             margin-bottom: 20px;
+         }
+        .service-box
+        {
+             text-align: center;
+             padding: 20px;
+         }
+         .testimonial-section {
+                 padding: 50px 0;
+                 text-align: center;
+             }
+             .testimonial-header {
+                 color: #333;
+                 font-size: 1.5rem;
+                 margin-bottom: 20px;
+                 font-weight: 600;
+             }
+             .testimonial-card {
+                 background-color: #fff;
+                 border-radius: 10px;
+                 box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                 padding: 30px;
+             }
+             .testimonial-text {
+                 font-size: 1rem;
+                 color: #555;
+                 margin-bottom: 20px;
+             }
+             .testimonial-author {
+                 display: flex;
+                 align-items: center;
+                 justify-content: center;
+             }
+             .testimonial-author img {
+                 border-radius: 50%;
+                 width: 50px;
+                 height: 50px;
+                 margin-right: 10px;
+             }
+             .author-info {
+                 text-align: left;
+             }
+             .author-info h6 {
+                 margin: 0;
+                 font-size: 0.9rem;
+                 font-weight: 600;
+                 color: #333;
+             }
+             .author-info span {
+                 font-size: 0.8rem;
+                 color: #777;
+             }
+         .booking-form {
+           background-color: #ffc107;
+           color: #fff;
+           padding: 50px 0;
+         }
+         .footer {
+           background-color: #212529;
+           color: #fff;
+           padding: 30px 0;
+         }
+         a {
+         text-decoration: none;
+         }
+         body {
+         overflow-x: hidden;
+         }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-custom">
+        <div class="container">
+            <a class="navbar-brand fw-bolder" href="#">FixItNow</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto fw-bold">
+                    <li class="nav-item me-3"><a class="nav-link" href="/Home/Index">Home</a></li>
+                    <li class="nav-item me-3"><a class="nav-link" href="/Home/AboutUs">About Us</a></li>
+                    <li class="nav-item me-3"><a class="nav-link" href="/Home/ContactUs">Contact Us</a></li>
+                    <li class="nav-item me-3"><a class="nav-link" href="/Services/Index">Need A Service?</a></li>
+                    <li class="nav-item me-3"><a class="nav-link" href="/Home/FAQS">FAQS</a></li>
+                    <li class="nav-item "><a class="btn btn-outline-dark  ms-2 me-2 " style="color:white;text-decoration: none;" href="/Authentication/SignIn">Login</a></li>
+                    <h3>/</h3>
+                    <li class="nav-item "><a class="btn btn-outline-dark  ms-2 me-2 " style="color:white;text-decoration: none;" asp-area="Identity" asp-page="/Account/Register">Sign Up</a></li>
+                    <li class="nav-item "><a class="btn btn-outline-dark bg-custom2 ms-2 me-2 " style="color:white;text-decoration: none;" href="/Authentication/ProviderRegistration">Join As A Provider</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section text-center">
+        <div class="container-fluid bg-custom">
+            <div class="row align-items-center">
+                <div class="col-md-6 ">
+                    <h1 style="padding-left: 10px;">The best solution for every problem.</h1>
+                    <p>Our open, positive, and proactive approach helps us find ways to align your work environment with the culture.</p>
+                    <a class="btn btn-success me-2" href="/Services/Index">Book Now</a>
+                    <a class="btn btn-success" href="/Home/AboutUs">Read More</a>
+                </div>
+                <div class="col-md-6">
+                    <img src="/images/svg1.svg" alt="Handyman" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container-fluid bg-custom">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class=" sect p-4 bg-custom1 text-white">
+                        <i class="fas fa-shield-alt mb-1"></i>
+                        <h5>Professional Expertise</h5>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class=" sect p-4 bg-custom1 text-white">
+                        <i class="fas fa-thumbs-up mb-1"></i>
+                        <h5>Reliable Service</h5>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="sect p-4 bg-custom1 text-white">
+                        <i class="fas fa-tags mb-1"></i>
+                        <h5>Affordable Rates</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="services-section">
+        <div class="container">
+            <h2 class="text-center mb-5">Explore our comprehensive range of professional services</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="service-box">
+                        <i class="service-icon bi bi-droplet"></i>
+                        <h5>Plumbing</h5>
+                        <p>Resolving leaks, pipe repairs, and faucet installations with precision and efficiency.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="service-box">
+                        <i class="service-icon bi bi-hammer"></i>
+                        <h5>Renovation</h5>
+                        <p>Transforming spaces with expert craftsmanship and innovative design.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="service-box">
+                        <i class="service-icon bi bi-brush"></i>
+                        <h5>Painting</h5>
+                        <p>Elevating interiors and exteriors with flawless finishes and vibrant colors.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service-box">
+                        <i class="service-icon bi bi-lightning"></i>
+                        <h5>Electrical Work</h5>
+                        <p>Ensuring safety and functionality through skilled electrical installations.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="service-box">
+                        <i class="service-icon bi bi-tools"></i>
+                        <h5>Carpentry</h5>
+                        <p>Crafting custom solutions for functional and aesthetic woodwork projects.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service-box">
+                        <i class="service-icon bi bi-house"></i>
+                        <h5>Roofing</h5>
+                        <p>Protecting homes with professional roofing solutions for lasting durability.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="testimonial-section bg-custom">
+        <h1>
+            <div class="quotation-icon text-black">
+                <i class="fas fa-quote-left"></i>
+            </div>
+        </h1>
+        <h2 class="testimonial-header text-white">Hear what they have to say about our professional services.</h2>
+        <div id="testimonialCarousel" class="carousel slide bg-custom" data-bs-ride="carousel">
+            <div class="carousel-inner bg-custom">
+  
+                <div class="carousel-item active bg-custom">
+                    <div class="testimonial-card mx-auto" style="max-width: 600px;">
+                        <p class="testimonial-text">
+                             @Model[0].comments
+                        </p>
+                        <div class="testimonial-author">
+                            <img src="/images/image.png" alt="User Image">
+                            <div class="author-info">
+                                <h6>@Model[0].name</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item bg-custom">
+                    <div class="testimonial-card mx-auto" style="max-width: 600px;">
+                        <p class="testimonial-text">
+                            @Model[1].comments
+                        </p>
+                        <div class="testimonial-author">
+                            <img src="/images/image.png" alt="User Image">
+                            <div class="author-info">
+                                <h6>@Model[1].name</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item bg-custom">
+                    <div class="testimonial-card mx-auto" style="max-width: 600px;">
+                        <p class="testimonial-text">
+                            @Model[2].comments
+                        </p>
+                        <div class="testimonial-author">
+                            <img src="/images/image.png" alt="User Image">
+                            <div class="author-info">
+                                <h6>@Model[2].name</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <section class="bg-custom1 text-white text-center py-5">
+        <div class="container-fluid" style="height: 300px;">
+            <p class="text-uppercase fw-bold mb-3" style="letter-spacing: 2px;">How We Help</p>
+            <h1 class="display-5 fw-bold mb-4">We're here to help you with top-notch services tailored to your needs.</h1>
+            <p class="lead mb-4">
+                Search for the services you need, and let us help you achieve your goals with professional care.
+            </p>
+            <div class="d-flex justify-content-center">
+                <form class="w-100" style="max-width: 300px;">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for services..." aria-label="Search">
+                        <button class="btn btn-light" type="submit"> <a style="text-decoration:none"href="/Services/Index">Search</a></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white py-4 mt-1" style="overflow-x: hidden;">
+        <div class="container-fluid" style="padding: 0 15px;">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 mb-4" style="padding-right: 15px; padding-left: 15px;">
+                    <h3 style="margin-bottom: 20px;">My Account</h3>
+                    <ul class="list-unstyled" style="margin: 0; padding: 0;">
+                        <li style="margin-bottom: 10px;"><a href="/Authentication/SignIn" class="text-white" style="text-decoration: none;">Sign In</a></li>
+                        <li style="margin-bottom: 10px;"><a href="/Authentication/SignUp" class="text-white" style="text-decoration: none;">Create Account</a></li>
+                        <li style="margin-bottom: 10px;"><a href="/Services/UserCart" class="text-white" style="text-decoration: none;">Cart</a></li>
+                        <li style="margin-bottom: 10px;"><a href="/Services/UserCart" class="text-white" style="text-decoration: none;">Wish List</a></li>
+                        <li style="margin-bottom: 10px;"><a href="/Home/Privacy" class="text-white" style="text-decoration: none;">Privacy Policy & Terms</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" class="text-white" style="text-decoration: none;">Payment</a></li>
+                        <li style="margin-bottom: 10px;"><a href="/Home/ContcatUs" class="text-white" style="text-decoration: none;">Contact Us</a></li>
+                        <li style="margin-bottom: 10px;"><a href="/Home/FAQS" class="text-white" style="text-decoration: none;">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4" style="padding-right: 15px; padding-left: 15px;">
+                    <ul class="list-unstyled" style="margin: 0; padding: 0;">
+                        <li style="margin-bottom: 10px;"><a href="/Services/Index" class="text-white" style="text-decoration: none;">Click here to Avail Services</a></li>
+                        <li style="margin-bottom: 10px;"><a href="/Services/FilteredView/1" class="text-white" style="text-decoration: none;">For Home & Property Services</a></li>
+                        <li style="margin-bottom: 10px;"><a href="/Services/FilteredView/3" class="text-white" style="text-decoration: none;">For Technical & IT Services</a></li>
+                        <li style="margin-bottom: 10px;"><a href="/Services/FilteredView/10" class="text-white" style="text-decoration: none;">For Personal & Lifestyle Services</a></li>
+                        <li style="margin-bottom: 10px;"><a href="/Services/FilteredView/7" class="text-white" style="text-decoration: none;">For Business & Professional Services</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4" style="padding-right: 15px; padding-left: 15px;">
+                    <p style="margin-bottom: 20px;">To have free advice from our Professional Team about your requirements, click the link below.</p>
+                    <a href="/Home/ContactUs" class="text-white fw-bold" style="text-decoration: none;">Fix It Now Advisory</a>
+                    <div class="mt-4">
+                        <p style="font-weight: bold; margin-bottom: 15px;">Follow Us</p>
+                        <a href="https://www.facebook.com" class="text-white me-3" target="blank" title="Facebook" style="margin-right: 10px; text-decoration: none;">
+                            <i class="fab fa-facebook fa-lg"></i>
+                        </a>
+                        <a href="https://www.twitter.com" class="text-white me-3" target="blank" title="Twitter" style="margin-right: 10px; text-decoration: none;">
+                            <i class="fab fa-twitter fa-lg"></i>
+                        </a>
+                        <a href="https://www.instagram.com" class="text-white me-3" target="blank" title="Instagram" style="margin-right: 10px; text-decoration: none;">
+                            <i class="fab fa-instagram fa-lg"></i>
+                        </a>
+                        <a href="https://www.linkedin.com" class="text-white" target="blank" title="LinkedIn" style="text-decoration: none;">
+                            <i class="fab fa-linkedin fa-lg"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4" style="padding-right: 15px; padding-left: 15px;">
+                    <p style="margin-bottom: 15px;">Fix It Now</p>
+                    <p style="margin-bottom: 10px;">Contact Number:<br> +92 42 111 333 465</p>
+                    <p style="margin-bottom: 10px;">Office Timing:<br> Mon-Sat 10am - 6pm</p>
+                    <p style="margin-bottom: 10px;">For Sales Inquiries:<br> <a href="mailto:sales@fixitnow.com" class="text-white" style="text-decoration: none;">sales@fixitnow.com</a></p>
+                    <p style="margin-bottom: 15px;">Office Location <br><a href="https://www.google.com/maps" target="_blank" class="text-white" style="text-decoration: none;">View on Map</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="row border-top mt-3" style="margin: 0;">
+            <div class="col-12 text-left mt-3" style="padding-right: 15px; padding-left: 15px;">
+                <p class="mb-0">© 2019 - 2024 Fix It Now</p>
+            </div>
+        </div>
+    </footer>
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">Notification</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body" id="toastBody">
+                 A new service has been added
+                 <span>
+                     <a href="/Services/Index">Click here to view</a>
+                 </span>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

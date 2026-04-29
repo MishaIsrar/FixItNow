@@ -1,0 +1,26 @@
+﻿@model List<Service>
+
+<h1 class="text-center fw-bolder mb-5">Results</h1>
+<div class="row g-4">
+    @if (Model != null && Model.Any())
+    {
+        @foreach (var service in Model)
+        {
+            <div class="col-md-4 d-flex">
+                <div class="card service-card flex-fill">
+                    <img src="/@service.referenceImagePath" class="card-img-top" alt="@service.title">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">@service.title</h5>
+                        <p class="card-text">Provider: @service.provider</p>
+                        <p class="card-text"><strong>Starting Price: $@service.pricing</strong></p>
+                        <a href="/Services/ServiceDetails/@service.id" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <h4 class="text-center text-danger">No Services Found</h4>
+    }
+</div>

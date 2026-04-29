@@ -1,0 +1,84 @@
+html {
+    min-height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.bg-custom {
+    background-color: #8fc1e5;
+}
+
+.app-navbar .navbar-nav {
+    gap: .25rem;
+}
+
+.app-navbar .nav-link {
+    border-radius: .375rem;
+    padding-inline: .75rem;
+}
+
+.app-navbar .nav-link:hover,
+.app-navbar .nav-link:focus {
+    background: rgba(255, 255, 255, .35);
+}
+
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.card {
+    overflow-wrap: anywhere;
+}
+
+.card-body {
+    overflow-x: auto;
+}
+
+.btn,
+.form-control,
+.form-select {
+    min-height: 42px;
+}
+
+@media (max-width: 767.98px) {
+    .container,
+    .container-fluid {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.65rem;
+    }
+
+    h3 {
+        font-size: 1.35rem;
+    }
+
+    .card-body {
+        padding: 1rem;
+    }
+
+    .btn {
+        white-space: normal;
+    }
+
+    table {
+        min-width: 640px;
+    }
+}
