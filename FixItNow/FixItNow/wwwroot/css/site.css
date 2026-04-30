@@ -1,14 +1,14 @@
 :root {
-    --app-bg: #f5f7fb;
+    --app-bg: #f4f8fc;
     --app-surface: #ffffff;
     --app-surface-soft: #eef4f8;
-    --app-text: #14213d;
+    --app-text: #102a43;
     --app-muted: #64748b;
     --app-border: #dbe3ea;
-    --app-primary: #0f5e6e;
-    --app-primary-dark: #0a3f4c;
-    --app-primary-soft: #dff3f6;
-    --app-accent: #f59e0b;
+    --app-primary: #1c63a7;
+    --app-primary-dark: #0a4b78;
+    --app-primary-soft: #dbeeff;
+    --app-accent: #f48763;
     --app-success: #16885d;
     --app-danger: #c93645;
     --app-radius: 8px;
@@ -95,6 +95,20 @@ a:hover {
     background: var(--app-primary);
     border-color: var(--app-primary);
     color: #fff;
+}
+
+.btn-warning,
+.btn-accent {
+    background: var(--app-accent);
+    border-color: var(--app-accent);
+    color: #1f2933;
+}
+
+.btn-warning:hover,
+.btn-accent:hover {
+    background: #e57750;
+    border-color: #e57750;
+    color: #111827;
 }
 
 .btn-primary:hover,
