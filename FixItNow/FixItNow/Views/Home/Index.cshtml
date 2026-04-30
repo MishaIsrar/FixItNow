@@ -2,6 +2,9 @@
     Layout = "_Layout";
 }
 @model List<Review>
+@{
+    var testimonials = Model?.Take(3).ToList() ?? new List<Review>();
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -289,48 +292,41 @@
         <h2 class="testimonial-header text-white">Hear what they have to say about our professional services.</h2>
         <div id="testimonialCarousel" class="carousel slide bg-custom" data-bs-ride="carousel">
             <div class="carousel-inner bg-custom">
-  
-                <div class="carousel-item active bg-custom">
-                    <div class="testimonial-card mx-auto" style="max-width: 600px;">
-                        <p class="testimonial-text">
-                             @Model[0].comments
-                        </p>
-                        <div class="testimonial-author">
-                            <img src="/images/image.png" alt="User Image">
-                            <div class="author-info">
-                                <h6>@Model[0].name</h6>
+                @if (testimonials.Any())
+                {
+                    for (var i = 0; i < testimonials.Count; i++)
+                    {
+                        <div class="carousel-item @(i == 0 ? "active" : "") bg-custom">
+                            <div class="testimonial-card mx-auto" style="max-width: 600px;">
+                                <p class="testimonial-text">
+                                    @testimonials[i].comments
+                                </p>
+                                <div class="testimonial-author">
+                                    <img src="/images/image.png" alt="User Image">
+                                    <div class="author-info">
+                                        <h6>@testimonials[i].name</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="carousel-item active bg-custom">
+                        <div class="testimonial-card mx-auto" style="max-width: 600px;">
+                            <p class="testimonial-text">
+                                Trusted local service providers are ready to help with your next task.
+                            </p>
+                            <div class="testimonial-author">
+                                <img src="/images/image.png" alt="User Image">
+                                <div class="author-info">
+                                    <h6>FixItNow</h6>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="carousel-item bg-custom">
-                    <div class="testimonial-card mx-auto" style="max-width: 600px;">
-                        <p class="testimonial-text">
-                            @Model[1].comments
-                        </p>
-                        <div class="testimonial-author">
-                            <img src="/images/image.png" alt="User Image">
-                            <div class="author-info">
-                                <h6>@Model[1].name</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="carousel-item bg-custom">
-                    <div class="testimonial-card mx-auto" style="max-width: 600px;">
-                        <p class="testimonial-text">
-                            @Model[2].comments
-                        </p>
-                        <div class="testimonial-author">
-                            <img src="/images/image.png" alt="User Image">
-                            <div class="author-info">
-                                <h6>@Model[2].name</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                }
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
