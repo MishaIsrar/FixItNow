@@ -15,7 +15,8 @@
     <link href="~/css/site.css" rel="stylesheet" asp-append-version="true" />
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-custom app-navbar">
+    <div class="app-shell">
+    <nav class="navbar navbar-expand-lg navbar-light app-navbar">
         <div class="container">
             <a class="navbar-brand fw-bolder" href="/Home/Index">FixItNow</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,11 +26,11 @@
                 <ul class="navbar-nav ms-auto fw-bold">
                     @if (currentUser?.Type == "user")
                     {
-                        <li class="nav-item"><a class="nav-link" href="/Authentication/Index">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/Home/Index">Home</a></li>
                     }
                     else if (currentUser?.Type == "provider")
                     {
-                        <li class="nav-item"><a class="nav-link" href="/Authentication/ProviderUI">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/Home/Index">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="/Provider/ProviderPanel">Provider Panel</a></li>
                     }
                     else if (currentUser?.Type == "admin")
@@ -59,9 +60,49 @@
         </div>
     </nav>
 
-    <main role="main" class="pb-3">
+    <main role="main" class="app-main">
         @RenderBody()
     </main>
+
+    <footer class="app-footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="footer-brand h4 fw-bold mb-3">FixItNow</div>
+                    <p class="mb-0">Reliable services, vetted providers, and simple booking tools for everyday home and professional needs.</p>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h6 class="fw-bold mb-3">Explore</h6>
+                    <ul class="list-unstyled d-grid gap-2">
+                        <li><a href="/Services/Index">Services</a></li>
+                        <li><a href="/Home/AboutUs">About</a></li>
+                        <li><a href="/Home/FAQS">FAQs</a></li>
+                        <li><a href="/Home/ContactUs">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <h6 class="fw-bold mb-3">Account</h6>
+                    <ul class="list-unstyled d-grid gap-2">
+                        <li><a href="/Authentication/SignIn">Sign in</a></li>
+                        <li><a href="/Authentication/SignUp">Create account</a></li>
+                        <li><a href="/Authentication/ProviderRegistration">Join as provider</a></li>
+                        <li><a href="/Message/Inbox">Inbox</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h6 class="fw-bold mb-3">Contact</h6>
+                    <p class="mb-2">Lahore, Punjab, Pakistan</p>
+                    <p class="mb-2"><a href="mailto:contact@fixitnow.com">contact@fixitnow.com</a></p>
+                    <p class="mb-0"><a href="tel:+923403040319">+92 340 3040319</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between gap-2">
+                <span>&copy; @DateTime.Now.Year FixItNow. All rights reserved.</span>
+                <span>Built for fast, local service booking.</span>
+            </div>
+        </div>
+    </footer>
+    </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>

@@ -1,166 +1,69 @@
-﻿@{
-    Layout ="_Layout1";
+@{
+    Layout = "_Layout1";
+    ViewData["Title"] = "Services";
 }
 @model List<Service>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Service Offerings</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
+<section class="app-section">
+    <div class="container">
+        <div class="app-page-header text-center">
+            <span class="eyebrow">Marketplace</span>
+            <h1 class="fw-bold mt-2 mb-2">Available services</h1>
+            <p class="lead-muted mb-0">Search, filter, and compare providers before booking.</p>
+        </div>
 
-        .bg-custom {
-            background-color: #1c63a7;
-        }
-
-        .service-card {
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease;
-        }
-
-            .service-card:hover {
-                transform: translateY(-5px);
-            }
-
-        .card-img-top {
-            height: 200px;
-            object-fit: cover;
-            border-radius: 10px 10px 0 0;
-        }
-
-        .card-title {
-            font-weight: bold;
-            font-size: 1.25rem;
-        }
-
-        .card-text {
-            font-size: 0.9rem;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            border: none;
-        }
-
-            .btn-primary:hover {
-                background-color: #0056b3;
-            }
-    </style>
-</head>
-<body>
-    <div class="container py-5">
-        <div class="row justify-content-center mb-4">
-            <div class="col-md-6">
-                <div class="input-group">
-                    <input type="text" id="searchInput" class="form-control" placeholder="Search for a service...">
-                    <button id="searchButton" class="btn btn-primary">Search</button>
+        <div class="app-card p-3 p-md-4 mb-4">
+            <div class="row g-3 align-items-center">
+                <div class="col-lg-7">
+                    <div class="input-group">
+                        <input type="text" id="searchInput" class="form-control" placeholder="Search for a service...">
+                        <button id="searchButton" class="btn btn-primary">Search</button>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="d-flex flex-column flex-sm-row gap-2 justify-content-lg-end">
+                        <button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft" aria-controls="offcanvasLeft">Categories</button>
+                        <a href="/Services/SortByPricing" class="btn btn-outline-primary">Sort by price</a>
+                    </div>
                 </div>
             </div>
+            <div id="searchResults" class="mt-4"></div>
         </div>
 
-        <div class="row">
-            <div id="searchResults" class="col-12">
-              
-            </div>
-        </div>
-    </div>
-
-    <div class="container py-5">
-        <div class="d-flex flex-column flex-sm-row gap-2 justify-content-sm-end">
-            <button class="btn btn-primary"
-                    type="button"
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasLeft"
-                    aria-controls="offcanvasLeft">
-                Select A Category
-            </button>
-        </div>
-        <div>
-            <a href="/Services/SortByPricing" class="btn btn-success text-black text-decoration-none">
-                Sort By Price
-            </a>
-        </div>
         <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasLeft" aria-labelledby="offcanvasLeftLabel">
-            <div class="offcanvas-header bg-custom">
-                <h5 class="offcanvas-title" id="offcanvasLeftLabel">Categories</h5>
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title fw-bold" id="offcanvasLeftLabel">Categories</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
-            <div class="offcanvas-body bg-custom">
-                <div class="row gy-3">
-                    <div class="col-6">
-                        <a href="/Services/FilteredView/1" class="btn btn-outline-light w-100">Construction</a>
-                    </div>
-                    <div class="col-6">
-                        <a href="/Services/FilteredView/2" class="btn btn-outline-light w-100">Content Creation</a>
-                    </div>
-                    <div class="col-6">
-                        <a href="/Services/FilteredView/3" class="btn btn-outline-light w-100">Technology & IT Services</a>
-                    </div>
-                    <div class="col-6">
-                        <a href="/Services/FilteredView/4" class="btn btn-outline-light w-100">Designing and Creativity</a>
-                    </div>
-                    <div class="col-6">
-                        <a href="/Services/FilteredView/5" class="btn btn-outline-light w-100">Animation & Video Editing</a>
-                    </div>
-                    <div class="col-6">
-                        <a href="/Services/FilteredView/6" class="btn btn-outline-light w-100">Education & Training</a>
-                    </div>
-                    <div class="col-6">
-                        <a href="/Services/FilteredView/7" class="btn btn-outline-light w-100">Business & Administrative Services</a>
-                    </div>
-                    <div class="col-6">
-                        <a href="/Services/FilteredView/8" class="btn btn-outline-light w-100">Healthcare & Wellness</a>
-                    </div>
-                    <div class="col-6">
-                        <a href="/Services/FilteredView/9" class="btn btn-outline-light w-100">Legal & Financial Services</a>
-                    </div>
-                    <div class="col-6">
-                        <a href="/Services/FilteredView/10" class="btn btn-outline-light w-100">Home & Lifestyle Services</a>
-                    </div>
-                    <div class="col-6">
-                        <a href="/Services/FilteredView/11" class="btn btn-outline-light w-100">Repair & Maintenance</a>
-                    </div>
-                    <div class="col-6">
-                        <a href="/Services/FilteredView/12" class="btn btn-outline-light w-100">Logistics & Delivery</a>
-                    </div>
-                    <div class="col-6">
-                        <a href="/Services/FilteredView/13" class="btn btn-outline-light w-100">Entertainment & Leisure</a>
-                    </div>
-                    <div class="col-6">
-                        <a href="/Services/FilteredView/14" class="btn btn-outline-light w-100">Freelance & Gig Services</a>
-                    </div>
-                    <div class="col-6">
-                        <a href="/Services/FilteredView/15" class="btn btn-outline-light w-100">Digital Marketing</a>
-                    </div>
-
+            <div class="offcanvas-body">
+                <div class="d-grid gap-2">
+                    @foreach (var item in new Dictionary<int, string> {
+                        {1, "Construction"}, {2, "Content Creation"}, {3, "Technology & IT Services"}, {4, "Designing and Creativity"},
+                        {5, "Animation & Video Editing"}, {6, "Education & Training"}, {7, "Business & Administrative Services"},
+                        {8, "Healthcare & Wellness"}, {9, "Legal & Financial Services"}, {10, "Home & Lifestyle Services"},
+                        {11, "Repair & Maintenance"}, {12, "Logistics & Delivery"}, {13, "Entertainment & Leisure"},
+                        {14, "Freelance & Gig Services"}, {15, "Digital Marketing"}
+                    })
+                    {
+                        <a href="/Services/FilteredView/@item.Key" class="btn btn-outline-primary text-start">@item.Value</a>
+                    }
                 </div>
             </div>
-
         </div>
-    </div>
-    <div class="container py-5">
-        <h1 class="text-center fw-bolder mb-5">Available Services</h1>
+
         <div class="row g-4">
             @if (Model != null && Model.Any())
             {
                 @foreach (var service in Model)
                 {
-                    <div class="col-sm-6 col-lg-4 d-flex">
-                        <div class="card service-card flex-fill">
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="card service-card">
                             <img src="/@service.referenceImagePath" class="card-img-top" alt="@service.title">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">@service.title</h5>
-                                <p class="card-text">Provider: @service.provider</p>
-                                <p class="card-text"><strong>Starting Price: $@service.pricing</strong></p>
-                                <a href="/Services/ServiceDetails/@service.id" class="btn btn-primary">Learn More</a>
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold">@service.title</h5>
+                                <p class="lead-muted mb-2">Provider: @service.provider</p>
+                                <p class="fw-bold mb-3">Starting price: @service.pricing</p>
+                                <a href="/Services/ServiceDetails/@service.id" class="btn btn-primary w-100">View details</a>
                             </div>
                         </div>
                     </div>
@@ -168,13 +71,12 @@
             }
             else
             {
-                <h4 class="text-danger">No Services Available </h4>
+                <div class="col-12"><div class="empty-state">No services available yet.</div></div>
             }
-           
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</section>
+
+@section Scripts {
     <script src="~/js/newFile.1.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+}

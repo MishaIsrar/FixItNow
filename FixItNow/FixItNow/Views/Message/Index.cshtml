@@ -1,75 +1,43 @@
-﻿@{
+@{
     Layout = "_Layout1";
+    ViewData["Title"] = "Contact Provider";
 }
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Service</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body {
-            background: #bfd7ef;
-        }
-        .message-box {
-            max-width: 700px;
-            margin: 50px auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background-color: #fff;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .message-box h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color:#1c63a7;
-            font-weight: bolder;
 
-        }
-        .form-group
-        {
-            color:#1c63a7;
-        }
-        .form-control:focus {
-            box-shadow: none;
-            border-color: #007bff;
-        }
-        .btn-primary {
-            display: block;
-            width: 30%;
-        }
-    </style>
-</head>
-<body>
-
+<section class="app-section">
     <div class="container">
-        <div class="message-box">
-            <h2>Contact Provider</h2>
-            <form action="#" method="POST" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="from">From</label>
-                    <input type="text" id="from" name="from" class="form-control" placeholder="Your name or email" required>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="app-card p-4 p-lg-5">
+                    <span class="eyebrow">Provider Message</span>
+                    <h1 class="fw-bold mt-2 mb-3">Contact provider</h1>
+                    <p class="lead-muted mb-4">Ask a question before booking or share extra context about your service request.</p>
+
+                    @if (!string.IsNullOrWhiteSpace(ViewBag.Error))
+                    {
+                        <div class="alert alert-danger" role="alert">@ViewBag.Error</div>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(ViewBag.Sent))
+                    {
+                        <div class="alert alert-success" role="alert">@ViewBag.Sent</div>
+                    }
+
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="from" class="form-label">From</label>
+                            <input type="text" id="from" name="from" class="form-control" placeholder="Your name or email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="messagetitle" class="form-label">Subject</label>
+                            <input type="text" id="messagetitle" name="messagetitle" class="form-control" placeholder="What is your message about?" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea id="message" name="message" rows="6" class="form-control" placeholder="Write your message here..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary px-4">Send message</button>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label for="messagetitle">Message Title</label>
-                    <input type="text" id="messagetitle" name="messagetitle" class="form-control" placeholder="Enter message title" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="5" class="form-control" placeholder="Write your message here..." required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Send</button>
-            </form>
-            <h4 class="text-danger mt-2">@ViewBag.Error!!!</h4>
-            <h4 class="text-success mt-2">@ViewBag.Sent</h4>
+            </div>
         </div>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-</body>
-</html>
-
+</section>

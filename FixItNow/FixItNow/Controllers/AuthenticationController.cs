@@ -139,7 +139,9 @@ namespace FixItNow.Controllers
             }
 
             _currentUserService.SignIn(id, credentials.type);
-            return credentials.type == "provider" ? View("ProviderUI") : View("Index");
+            return credentials.type == "provider"
+                ? RedirectToAction("ProviderPanel", "Provider")
+                : RedirectToAction("Index", "Home");
         }
 
         [HttpGet]

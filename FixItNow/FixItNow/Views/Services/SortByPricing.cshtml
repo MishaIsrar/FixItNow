@@ -1,79 +1,35 @@
-﻿@{
-    Layout="_Layout1";
-}
 @{
     Layout = "_Layout1";
+    ViewData["Title"] = "Services by Price";
 }
 @model List<Service>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Service Offerings</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
+<section class="app-section">
+    <div class="container">
+        <div class="app-page-header d-flex flex-column flex-lg-row justify-content-between gap-3">
+            <div>
+                <span class="eyebrow">Sorted by price</span>
+                <h1 class="fw-bold mt-2 mb-2">Affordable services first</h1>
+                <p class="lead-muted mb-0">Compare service listings from lowest price upward.</p>
+            </div>
+            <div class="align-self-lg-end">
+                <a href="/Services/Index" class="btn btn-outline-primary">Back to marketplace</a>
+            </div>
+        </div>
 
-        .bg-custom {
-            background-color: #1c63a7;
-        }
-
-        .service-card {
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease;
-        }
-
-            .service-card:hover {
-                transform: translateY(-5px);
-            }
-
-        .card-img-top {
-            height: 200px;
-            object-fit: cover;
-            border-radius: 10px 10px 0 0;
-        }
-
-        .card-title {
-            font-weight: bold;
-            font-size: 1.25rem;
-        }
-
-        .card-text {
-            font-size: 0.9rem;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            border: none;
-        }
-
-            .btn-primary:hover {
-                background-color: #0056b3;
-            }
-    </style>
-</head>
-<body>
-    <div class="container py-5">
-        <h1 class="text-center fw-bolder mb-5">Available Services sorted by price</h1>
         <div class="row g-4">
             @if (Model != null && Model.Any())
             {
                 @foreach (var service in Model)
                 {
-                    <div class="col-sm-6 col-lg-4 d-flex">
-                        <div class="card service-card flex-fill">
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="card service-card">
                             <img src="/@service.referenceImagePath" class="card-img-top" alt="@service.title">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">@service.title</h5>
-                                <p class="card-text">Provider: @service.provider</p>
-                                <p class="card-text"><strong>Starting Price: $@service.pricing</strong></p>
-                                <a href="/Services/ServiceDetails/@service.id" class="btn btn-primary">Learn More</a>
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold">@service.title</h5>
+                                <p class="lead-muted mb-2">Provider: @service.provider</p>
+                                <p class="fw-bold mb-3">Starting price: @service.pricing</p>
+                                <a href="/Services/ServiceDetails/@service.id" class="btn btn-primary w-100">View details</a>
                             </div>
                         </div>
                     </div>
@@ -81,12 +37,8 @@
             }
             else
             {
-                <h4 class="text-danger">No Services</h4>
+                <div class="col-12"><div class="empty-state">No services available yet.</div></div>
             }
-
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+</section>

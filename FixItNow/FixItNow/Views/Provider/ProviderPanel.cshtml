@@ -1,144 +1,49 @@
-﻿@{
+@{
     Layout = "_Layout1";
+    ViewData["Title"] = "Provider Panel";
 }
-
 @model FixItNow.Models.ViewModel.ProviderPanel
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Service Provider Interface</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f8f9fa;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
 
-        .card {
-            border-radius: 12px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-        }
+<section class="app-section">
+    <div class="container">
+        <div class="app-page-header d-flex flex-column flex-lg-row justify-content-between gap-3">
+            <div>
+                <span class="eyebrow">Provider Dashboard</span>
+                <h1 class="fw-bold mt-2 mb-2">Manage your services</h1>
+                <p class="lead-muted mb-0">Track bookings, revenue, service performance, and customer messages.</p>
+            </div>
+            <div class="align-self-lg-end">
+                <a class="btn btn-primary" href="/Services/AddService">Add new service</a>
+            </div>
+        </div>
 
-        .navbar-brand {
-            font-weight: bold;
-            font-size: 1.75rem;
-            color: #0d6efd;
-        }
+        <div class="row g-3 mb-4">
+            <div class="col-md-4">
+                <div class="stat-tile">
+                    <div class="text-muted">Total Services</div>
+                    <div class="stat-value">@(Model.services?.Count ?? 0)</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-tile">
+                    <div class="text-muted">Total Bookings</div>
+                    <div class="stat-value">@(Model.bookings?.Count ?? 0)</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-tile">
+                    <div class="text-muted">Messages</div>
+                    <div class="stat-value">@(Model.messages?.Count ?? 0)</div>
+                </div>
+            </div>
+        </div>
 
-            .navbar-brand:hover {
-                color: #0056b3;
-            }
-
-        .section-title {
-            font-size: 1.4rem;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .btn-custom {
-            background-color: #0d6efd;
-            color: #fff;
-            border-radius: 20px;
-            padding: 10px 20px;
-            transition: all 0.3s ease;
-        }
-
-            .btn-custom:hover {
-                background-color: #004aad;
-            }
-
-        th {
-            color: #0d6efd;
-            font-size: 1.1rem;
-        }
-
-        h1 {
-            color: #0a4275;
-            font-weight: bolder;
-            margin-bottom: 20px;
-        }
-
-        .bg-custom {
-            background-color: #e9f5ff;
-            text-align: center;
-            padding: 20px;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            color: #0d6efd;
-        }
-
-        #add {
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
-
-        #vm {
-            text-decoration: none;
-            color: #0d6efd;
-            font-weight: bold;
-            transition: color 0.3s ease;
-        }
-
-            #vm:hover {
-                color: #0056b3;
-            }
-
-        .badge {
-            font-size: 0.95rem;
-        }
-
-        .timeline-item {
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 10px;
-            margin-bottom: 10px;
-        }
-
-            .timeline-item:last-child {
-                border-bottom: none;
-            }
-
-        .btn {
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            background-color: #004aad;
-        }
-
-        .btn-danger:hover {
-            background-color: #bb2d3b;
-        }
-
-        table {
-            border-collapse: separate;
-            border-spacing: 0 10px;
-        }
-
-        tbody tr {
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-            tbody tr td {
-                vertical-align: middle;
-            }
-    </style>
-</head>
-<body>
-    <div class="text-center mt-4">
-        <h1>Welcome, <span style="color: #0d6efd;">Provider</span></h1>
-    </div>
-
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="section-title">Bookings</h5>
+        <div class="app-card mb-4">
+            <div class="card-body">
+                <h4 class="fw-bold mb-3">Recent bookings</h4>
+                @if (Model.bookings != null && Model.bookings.Any())
+                {
+                    <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
@@ -146,124 +51,99 @@
                                     <th>Title</th>
                                     <th>Date</th>
                                     <th>Price</th>
-                                    <th>Customer Id</th>
+                                    <th>Customer</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (Model.bookings != null && Model.titles != null && Model.titles.Count()>0 && Model.bookings.Count()>0)
-                                {
-                                    @for (int i = 0; i < Model.bookings.Count(); i++)
-                                    {
-                                        <tr>
-                                            <td>@Model.bookings[i].Id</td>
-                                            <td>@Model.titles[i]</td>
-                                            <td>@Model.bookings[i].Date.ToString("dd MMM yyyy")</td>
-                                            <td>@Model.bookings[i].pricing</td>
-                                            <td>@Model.bookings[i].customerId</td>
-                                        </tr>
-                                    }
-                                }
-                                else
+                                @for (int i = 0; i < Model.bookings.Count; i++)
                                 {
                                     <tr>
-                                        <td colspan="5" class="text-center text-muted">No data available</td>
+                                        <td>@Model.bookings[i].Id</td>
+                                        <td>@(Model.titles != null && i < Model.titles.Count ? Model.titles[i] : $"Service {Model.bookings[i].serviceId}")</td>
+                                        <td>@Model.bookings[i].Date.ToString("dd MMM yyyy")</td>
+                                        <td>@Model.bookings[i].pricing</td>
+                                        <td>@Model.bookings[i].customerId</td>
                                     </tr>
                                 }
                             </tbody>
                         </table>
                     </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4">
-                <div class="card mb-4">
-                    <div class="card-body bg-custom">
-                        <h5 class="section-title">Analytics</h5>
-                        <p>Total Services: <strong>@Model.services.Count()</strong></p>
-                        <p>Total Bookings: <strong>@Model.bookings.Count()</strong></p>
-                        <p>Pending Queries: <strong>@Model.messages.Count()</strong></p>
-                    </div>
-                </div>
-                <div class="mt-3" id="add">
-                    <h4>Want to add a new service?</h4>
-                    <button class="btn btn-lg btn-custom mt-3"><a href="/Services/AddService" style="text-decoration:none;color:black;">Add a New Service</a></button>
-                </div>
+                }
+                else
+                {
+                    <div class="empty-state">No bookings yet.</div>
+                }
             </div>
         </div>
 
-        <div class="row mt-4">
-            <div class="col-lg-12">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="section-title">Manage Services</h5>
+        <div class="app-card mb-4">
+            <div class="card-body">
+                <h4 class="fw-bold mb-3">Services</h4>
+                @if (Model.services != null && Model.services.Any())
+                {
+                    <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>Service Id</th>
-                                    <th>Service Title</th>
-                                    <th>Actions</th>
-                                    <th>Pricing</th>
-                                    <th>Total Bookings</th>
-                                    <th>Total Revenue</th>
+                                    <th>Service</th>
+                                    <th>Price</th>
+                                    <th>Bookings</th>
+                                    <th>Revenue</th>
+                                    <th class="text-end">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (Model.services != null && Model.services.Count()>0)
-                                {
-                                    @for (int i = 0; i < Model.services.Count(); i++)
-                                    {
-                                        <tr>
-                                            <td>@Model.services[i].id</td>
-                                            <td>@Model.services[i].title</td>
-                                            <td>
-                                                <button class="btn btn-sm btn-primary"><a style="text-decoration:none; color:white;" href="/Services/Edit/@Model.services[i].id">Edit</a></button>
-                                                <button class="btn btn-sm btn-danger"><a style="text-decoration:none; color:white;" href="/Services/RemoveService/@Model.services[i].id">Delete</a></button>
-                                            </td>
-                                            <td>@Model.services[i].pricing</td>
-                                            <td>@Model.countOfBookings[i]</td>
-                                            <td>@Model.revenueOfServices[i]</td>
-                                        </tr>
-                                    }
-                                }
-                                else
+                                @for (int i = 0; i < Model.services.Count; i++)
                                 {
                                     <tr>
-                                        <td colspan="6" class="text-center text-muted">No data available</td>
+                                        <td>@Model.services[i].title</td>
+                                        <td>@Model.services[i].pricing</td>
+                                        <td>@(Model.countOfBookings != null && i < Model.countOfBookings.Count ? Model.countOfBookings[i] : 0)</td>
+                                        <td>@(Model.revenueOfServices != null && i < Model.revenueOfServices.Count ? Model.revenueOfServices[i] : 0)</td>
+                                        <td class="text-end">
+                                            <a class="btn btn-sm btn-outline-primary" href="/Services/Edit/@Model.services[i].id">Edit</a>
+                                            <a class="btn btn-sm btn-outline-danger" href="/Services/RemoveService/@Model.services[i].id">Delete</a>
+                                        </td>
                                     </tr>
                                 }
                             </tbody>
                         </table>
                     </div>
-                </div>
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="section-title">User Questions / Messages</h5>
-                        @if (Model.messages != null && Model.messages.Count()>0)
-                        {
-                            @foreach (var question in Model.messages)
-                            {
-                                <div class="timeline-item mb-3 d-flex justify-content-between align-items-center">
-                                    <h6>@question.title</h6>
-                                    <p><strong></strong>@(question.message?.Length > 30 ? question.message.Substring(0, 30) + "..." : question.message)</p>
-                                    <span class="text-muted">
-                                        @question.senderName /
-                                        @question.serviceName /
-                                        @question.customerId
-                                    </span>
-                                    <button class="btn btn-sm btn-success"><a style="text-decoration:none; color:white;" href="/Message/Read/@question.Id">Read Message</a></button>
-                                </div>
-                            }
-                        }
-                        else
-                        {
-                            <p>No questions available at the moment.</p>
-                        }
-                    </div>
-                    <a href="/Message/Inbox" id="vm">View All</a>
-                </div>
+                }
+                else
+                {
+                    <div class="empty-state">Add your first service to start receiving bookings.</div>
+                }
             </div>
         </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+        <div class="app-card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center gap-3 mb-3">
+                    <h4 class="fw-bold mb-0">Customer messages</h4>
+                    <a href="/Message/Inbox" class="btn btn-sm btn-outline-primary">View all</a>
+                </div>
+                @if (Model.messages != null && Model.messages.Any())
+                {
+                    <div class="d-grid gap-3">
+                        @foreach (var question in Model.messages.Take(5))
+                        {
+                            <div class="p-3 border rounded d-flex flex-column flex-lg-row justify-content-between gap-3">
+                                <div>
+                                    <h6 class="fw-bold mb-1">@question.title</h6>
+                                    <p class="lead-muted mb-1">@(question.message?.Length > 80 ? question.message.Substring(0, 80) + "..." : question.message)</p>
+                                    <small class="text-muted">@question.senderName / @question.serviceName</small>
+                                </div>
+                                <a class="btn btn-sm btn-primary align-self-lg-center" href="/Message/Read/@question.Id">Read</a>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="empty-state">No messages yet.</div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
