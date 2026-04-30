@@ -18,6 +18,8 @@
 html {
     min-height: 100%;
     overflow-x: hidden;
+    scroll-behavior: smooth;
+    scroll-padding-top: 84px;
 }
 
 body {
@@ -26,6 +28,11 @@ body {
     background: var(--app-bg);
     color: var(--app-text);
     text-rendering: optimizeLegibility;
+}
+
+::selection {
+    background: var(--app-accent);
+    color: #111827;
 }
 
 img {
@@ -163,6 +170,10 @@ a:hover {
     padding: 72px 0;
 }
 
+.app-section-lg {
+    padding: 96px 0;
+}
+
 .app-page-header {
     padding: 48px 0 26px;
 }
@@ -186,6 +197,70 @@ a:hover {
     border-radius: var(--app-radius);
     background: var(--app-surface);
     box-shadow: var(--app-shadow);
+}
+
+.lift-3d,
+.stat-tile,
+.app-card,
+.service-card {
+    transform-style: preserve-3d;
+    transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+}
+
+.lift-3d:hover,
+.stat-tile:hover,
+.app-card:hover {
+    transform: translateY(-4px) perspective(900px) rotateX(1deg);
+    box-shadow: 0 22px 45px rgba(15, 35, 52, .14);
+    border-color: rgba(28, 99, 167, .25);
+}
+
+.reveal-up {
+    animation: revealUp .65s ease both;
+}
+
+.reveal-up-delay-1 {
+    animation: revealUp .75s ease .08s both;
+}
+
+.reveal-up-delay-2 {
+    animation: revealUp .75s ease .16s both;
+}
+
+.float-soft {
+    animation: floatSoft 5.5s ease-in-out infinite;
+}
+
+.feature-band {
+    background: linear-gradient(135deg, var(--app-primary), var(--app-primary-dark));
+    color: #fff;
+}
+
+.feature-band .lead-muted {
+    color: rgba(255, 255, 255, .78);
+}
+
+.step-card {
+    position: relative;
+    padding: 28px;
+    min-height: 100%;
+}
+
+.step-number {
+    width: 42px;
+    height: 42px;
+    display: inline-grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--app-accent);
+    color: #1f2933;
+    font-weight: 800;
+}
+
+.metric-strip {
+    border-top: 1px solid var(--app-border);
+    border-bottom: 1px solid var(--app-border);
+    background: rgba(255, 255, 255, .72);
 }
 
 .stat-tile .stat-value {
@@ -270,7 +345,7 @@ a:hover {
 }
 
 .service-card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-6px) perspective(900px) rotateX(1.5deg);
     box-shadow: 0 18px 38px rgba(15, 35, 52, .12);
 }
 
@@ -323,5 +398,39 @@ a:hover {
 
     table {
         min-width: 680px;
+    }
+}
+
+@keyframes revealUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes floatSoft {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
     }
 }

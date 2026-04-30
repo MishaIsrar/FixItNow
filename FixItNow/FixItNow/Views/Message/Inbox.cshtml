@@ -12,6 +12,12 @@
             <p class="lead-muted mb-0">Track customer and provider conversations in one place.</p>
         </div>
 
+        <div class="row g-3 mb-4">
+            <div class="col-md-4"><div class="stat-tile"><div class="stat-value">@(Model?.Count ?? 0)</div><div>Total messages</div></div></div>
+            <div class="col-md-4"><div class="stat-tile"><div class="fw-bold">Keep records</div><p class="lead-muted mb-0">Messages stay connected to services for easier follow-up.</p></div></div>
+            <div class="col-md-4"><div class="stat-tile"><div class="fw-bold">Reply with context</div><p class="lead-muted mb-0">Reference the service and task details when responding.</p></div></div>
+        </div>
+
         <div class="app-card">
             <div class="card-body p-0">
                 @if (Model != null && Model.Any())

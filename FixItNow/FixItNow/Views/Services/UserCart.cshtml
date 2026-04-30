@@ -12,6 +12,12 @@
             <p class="lead-muted mb-0">Review your booking history and quickly return to saved services.</p>
         </div>
 
+        <div class="row g-3 mb-4">
+            <div class="col-md-4"><div class="stat-tile h-100"><div class="stat-value">@(Model.Bookings?.Count ?? 0)</div><div>Total bookings</div></div></div>
+            <div class="col-md-4"><div class="stat-tile h-100"><div class="stat-value">@(Model.SavedServices?.Count ?? 0)</div><div>Saved services</div></div></div>
+            <div class="col-md-4"><div class="stat-tile h-100"><div class="stat-value">@(Model.exists?.Count(x => x == 1) ?? 0)</div><div>Reviews submitted</div></div></div>
+        </div>
+
         <div class="app-card mb-4">
             <div class="card-body">
                 <h4 class="fw-bold mb-3">Past bookings</h4>
