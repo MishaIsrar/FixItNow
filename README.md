@@ -122,10 +122,11 @@ For the current EC2 setup:
 
 ```text
 EC2_HOST=13.217.83.232
+EC2_USER=ubuntu
 EC2_PORT=22
 ```
 
-Use `ec2-user` for Amazon Linux or `ubuntu` for Ubuntu.
+Use `ubuntu` for this EC2 instance.
 
 ## EC2 Notes
 
